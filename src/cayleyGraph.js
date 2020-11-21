@@ -92,10 +92,25 @@ function mult(perms) {
 // function conjugate_element()
 
 const groupGenerators = {
-  S3: [[[1, 2]], [[1, 2, 3]]],
+  Z2: [[[1, 2]]],
+  Z2xZ2: [[[1, 2]], [[3, 4]]],
+  Z2xZ2xZ2: [[[1, 2]], [[3, 4]], [[5, 6]]],
+  Z2xZ3: [[[1, 2]], [[3, 4, 5]]],
   Z3: [[[1, 2, 3]]],
+  Z3xZ3: [[[1, 2, 3]], [[4, 5, 6]]],
+  Z3xZ3xZ3: [[[1, 2, 3]], [[4, 5, 6]], [[7, 8, 9]]],
+  Z4: [[[1, 2, 3, 4]]],
+  Z5: [[[1, 2, 3, 4, 5]]],
+  S3: [[[1, 2]], [[1, 2, 3]]],
   S4: [[[1, 2]], [[1, 2, 3, 4]]],
   S5: [[[1, 2]], [[1, 2, 3, 4, 5]]],
+  A4: [
+    [
+      [1, 2],
+      [3, 4],
+    ],
+    [[1, 2, 3]],
+  ],
   A5: [
     [
       [1, 2],
@@ -104,6 +119,7 @@ const groupGenerators = {
     [[1, 3, 5]],
   ],
 };
+export const groupNames = Object.keys(groupGenerators);
 
 function DFS(currentNode, nGraph, generators) {
   // add the current node and the edges to nGraph
