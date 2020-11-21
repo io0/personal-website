@@ -9,6 +9,20 @@ let test = {
   // edges format: [node 1, node 2, generator] -when you left multiply node1 by the generator you get node 2
   edges: [["(12)(134)", "(12)", "(13)"]],
 };
+// takes a permutation in the format [[1,2,3],[4,5],[6,8,7]]
+// and converts it to the string "(123)(45)(687)"
+function permToString(perm) {
+  let stringRep = "";
+  for (let cycle of perm) {
+    stringRep = stringRep + "(";
+    for (let i of cycle) {
+      stringRep = stringRep + i.toString();
+    }
+    stringRep = stringRep + ")";
+  }
+  return stringRep;
+}
+const IDEN = "()";
 /**
  *
  * @param {number} num
@@ -30,6 +44,15 @@ function getDestination(number, perms) {
   return nxt;
 }
 
+function getOrder(element) {
+  let currentElement = element;
+  let order = 1;
+  while (permToString(currentElement) != IDEN) {
+    currentElement = mult([...element, ...currentElement]);
+    order++;
+  }
+  return order;
+}
 /**
  *
  * @param {*} perms
@@ -68,19 +91,6 @@ function mult(perms) {
 
 // function conjugate_element()
 
-// takes a permutation in the format [[1,2,3],[4,5],[6,8,7]]
-// and converts it to the string "(123)(45)(687)"
-function permToString(perm) {
-  let stringRep = "";
-  for (let cycle of perm) {
-    stringRep = stringRep + "(";
-    for (let i of cycle) {
-      stringRep = stringRep + i.toString();
-    }
-    stringRep = stringRep + ")";
-  }
-  return stringRep;
-}
 const groupGenerators = {
   S3: [[[1, 2]], [[1, 2, 3]]],
   Z3: [[[1, 2, 3]]],
@@ -98,6 +108,8 @@ const groupGenerators = {
 function DFS(currentNode, nGraph, generators) {
   // add the current node and the edges to nGraph
   let currentNodeName = permToString(currentNode);
+  const order = getOrder(currentNode);
+  nGraph.meta[currentNodeName] = { order };
   nGraph.nodes.push(currentNodeName); // mark node as visited
   for (const gen of generators) {
     const child = mult([...gen, ...currentNode]);
@@ -118,6 +130,7 @@ export const getCayleyGraph = (groupName) => {
   const currentNode = [[]];
   let newGraph = {
     nodes: [],
+    meta: {},
     edges: [],
   };
   DFS(currentNode, newGraph, generators);

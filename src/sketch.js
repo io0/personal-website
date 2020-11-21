@@ -11,6 +11,16 @@ function int_to_hex(num) {
   if (hex.length == 1) hex = "0" + hex;
   return hex;
 }
+function polygon(p, radius, npoints) {
+  let angle = p.TWO_PI / npoints;
+  p.beginShape();
+  for (let a = 0; a < p.TWO_PI; a += angle) {
+    let sx = p.cos(a) * radius;
+    let sy = p.sin(a) * radius;
+    p.vertex(sx, sy);
+  }
+  p.endShape(p.CLOSE);
+}
 function blend_colors(color1, color2, percentage) {
   // check input
   color1 = color1 || "#000000";
@@ -194,6 +204,7 @@ const sketch = (p) => {
   var offset = 5;
   function drawEdge(edge, p1, p2) {
     // draw an edge
+    // console.log("E", edge);
     var x1 = toScreen(p1).x;
     var y1 = toScreen(p1).y;
     var x2 = toScreen(p2).x;
@@ -205,9 +216,10 @@ const sketch = (p) => {
         ? 0.7
         : 0.4
       : 0.6;
-    const color = "rgba(255,255,255," + scaling + ")";
+    // const color = "rgba(255,255,255," + scaling + ")";
     // separation ? 'rgba(255,255,255,' +  (Math.max(1 - separation[edge.target.id]/4, 0.0)*0.7 + 0.3) + ')'
     //                         : 255;
+    const color = cool[edge.data.length - 2];
     p.stroke(color);
     //p.strokeWeight(2);
     p.line(x1, y1, x2, y2);
@@ -253,14 +265,8 @@ const sketch = (p) => {
     //const maxSeparation = Math.max(...Object.values(separation))
 
     //const size = separation ? (maxSeparation - separation[node.id] + 1)/maxSeparation * nodeSize : nodeSize;
-    p.stroke(color);
-    p.strokeWeight(2);
-    p.fill(CONST.primaryCol);
-    if (node.id == uid) {
-      // uid means center of graph
-      //p.stroke(colors[separation[node.id]]);
-      p.circle(0, 0, nodeSize * 1.5);
-    }
+    // p.stroke(color);
+    // p.strokeWeight(2);
     if (node.id == parseInt(highlightedUserId)) {
       p.fill(255);
     }
@@ -268,16 +274,24 @@ const sketch = (p) => {
       //p.fill(colors[separation[node.id]]);
     }
 
-    if (
-      schools &&
-      schools[uid] &&
-      schools[node.id] &&
-      schools[node.id] !== schools[uid]
-    ) {
-      p.square(-nodeSize / 2, -nodeSize / 2, nodeSize, 5);
-      //p.triangle(-nodeSize/2, nodeSize/2, nodeSize/2, nodeSize/2, 0, -nodeSize/2);
-    } else {
+    const order = meta[node.id].order;
+    p.fill(custom[order - 1]);
+    p.noStroke();
+    if (order <= 2) {
       p.circle(0, 0, nodeSize);
+    } else if (order == 3) {
+      p.triangle(
+        -nodeSize / 2,
+        nodeSize / 2,
+        nodeSize / 2,
+        nodeSize / 2,
+        0,
+        -nodeSize / 2
+      );
+    } else if (order == 4) {
+      p.square(-nodeSize / 2, -nodeSize / 2, nodeSize);
+    } else {
+      polygon(p, nodeSize, order);
     }
 
     if (updateIds && updateIds.includes(parseInt(node.id)) && node.id !== uid) {
@@ -290,13 +304,12 @@ const sketch = (p) => {
     }
     // if (labels) {
     p.push();
-    if (scaling == 1) {
-      p.stroke(CONST.primaryCol);
-      p.strokeWeight(3);
-    } else {
-      p.noStroke();
-    }
-    p.fill(textColor);
+    // if (scaling == 1) {
+    //   p.stroke(CONST.primaryCol);
+    //   p.strokeWeight(3);
+    // } else {
+    p.noStroke();
+    // }
     if (node.id == uid) {
       p.text(node.id, -10, -30);
     } else {
@@ -310,6 +323,7 @@ const sketch = (p) => {
       //     }
       // }
       p.text(text, -10, -20);
+      p.fill(color);
     }
     p.textAlign(p.CENTER, p.CENTER);
     p.pop();
@@ -332,7 +346,7 @@ const sketch = (p) => {
     const cayleyGraph = getCayleyGraph("S4");
     graph = new Springy.Graph();
     graph.loadJSON(cayleyGraph);
-    // labels = testGraph.meta.labels;
+    meta = cayleyGraph.meta;
     // fixedGraph = false;
     const oldLayout = layout;
     layout = new Springy.Layout.ForceDirected(
@@ -374,7 +388,8 @@ const sketch = (p) => {
 
   p.draw = () => {
     //p.camera(100,0, 380, 0, 0, 0, 0, 1, 0);
-    p.background(CONST.primaryCol);
+    // p.background(CONST.primaryCol);
+    p.background("white");
     p.smooth();
     layout.eachEdge(function (edge, spring) {
       drawEdge(edge, spring.point1.p, spring.point2.p);
@@ -396,7 +411,6 @@ const sketch = (p) => {
           var y2 = toScreen(p2).y;
           //strings.push(new String(x1, y1, x2, y2, beadSpeed, colors[0], colors[0]));
         });
-        clearInterval(interval);
         if (graphJSON) {
           // proxy for if graph has been loaded
           p.noLoop();
