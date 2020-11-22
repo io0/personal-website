@@ -29,14 +29,98 @@ const Sidebar = styled.div`
   border-left: 1px solid grey;
 `;
 const Title = styled.div`
-  font-family: monospace;
+  font-family: modern;
   font-size: 20px;
 `;
+const LeftAlignPara = styled.div`
+  font-family: modern;
+  font-size: 15px;
+  text-align:left;
+`;
 
+// U+2124 is unicode for \mathbb Z
+// 
 const groupMetadata = {
   Z3: {
-    name: "Z mod 3",
+    name: "\u2124 mod 3",
+    symbol: "\u2124\u2083",
+    text: "\u2124 mod 3 has three elements, every non identity element is a generator."
   },
+  Z2: {
+    name: "\u2124 mod 2",
+    symbol: "\u2124\u2082",
+    text: ""
+  },
+  Z4: {
+    name: "\u2124 mod 4",
+    symbol: "\u2124\u2084",
+    text: ""
+  },
+  Z2xZ2: {
+    name: "Klein Four",
+    symbol: "K\u2084",
+    text: ""
+  },
+  Z2xZ2xZ2: {
+    name: "\u2124 mod 2 Cubed",
+    symbol: "(\u2124\u2082)\u00B3",
+    text: ""
+  },
+  Z2xZ2xZ4: {
+    name: "Klein Four times \u2124 mod 4",
+    symbol: "\u2124\u2082\u2715\u2124\u2082\u2715\u2124\u2084",
+    text: ""
+  },
+  Z2xZ3: {
+    name: "\u2124\u2082 times \u2124\u2083",
+    symbol: "\u2124\u2082\u2715\u2124\u2083",
+    text: ""
+  },
+  Z2xZ2xZ2xZ2: {
+    name: "\u2124\u2082\u2074",
+    symbol: "(\u2124\u2082)\u2074",
+    text: "" 
+  },
+  Z3xZ3: {
+    name: "\u2124\u2083 squared",
+    symbol: "(\u2124\u2083)\u00B2",
+    text: ""
+  },
+  Z5: {
+    name: "\u2124 mod 5",
+    symbol: "\u2124\u2085",
+    text: ""
+  },
+  S3: {
+    name: "Symmetry group on three elements",
+    symbol: "S\u2083",
+    text: ""
+  },
+  S4: {
+    name: "Symmetry group on four elements",
+    symbol: "S\u2084",
+    text: ""
+  },
+  S5: {
+    name: "Symmetry group on five elements",
+    symbol: "S\u2085",
+    text: ""
+  },
+  A4: {
+    name: "Alternating group on four elements",
+    symbol: "A\u2085",
+    text: ""
+  },
+  A5: {
+    name: "Alternating group on five elments",
+    symbol: "A\u2085",
+    text: ""
+  },
+  Z3xZ3xZ3: {
+    name: "Z mod 3 cubed",
+    symbol: "(\u2124\u2083)\u00B3",
+    text: ""
+  }
 };
 function App() {
   const [currentGroup, setCurrentGroup] = useState("Z3");
@@ -50,12 +134,13 @@ function App() {
               isSelected={group == currentGroup}
               onClick={() => setCurrentGroup(group)}
             >
-              {group}
+              {groupMetadata[group].symbol}
             </Button>
           ))}
         </div>
         <Sidebar>
           <Title>{groupMetadata[currentGroup].name}</Title>
+          <LeftAlignPara>{groupMetadata[currentGroup].text}</LeftAlignPara>
         </Sidebar>
       </Wrapper>
     </div>
