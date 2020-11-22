@@ -6,11 +6,13 @@ import { getCayleyGraph } from "./cayleyGraph";
 const CONST = {
   primaryCol: "#3949ab",
 };
+// utility function for creating color hexes in blend_colors
 function int_to_hex(num) {
   var hex = Math.round(num).toString(16);
   if (hex.length == 1) hex = "0" + hex;
   return hex;
 }
+// creates a polygon with npoints vertices of radius r, p is the sketch obj
 function polygon(p, radius, npoints) {
   let angle = p.TWO_PI / npoints;
   p.beginShape();
@@ -21,6 +23,7 @@ function polygon(p, radius, npoints) {
   }
   p.endShape(p.CLOSE);
 }
+// function for polygon colors
 function blend_colors(color1, color2, percentage) {
   // check input
   color1 = color1 || "#000000";
@@ -84,6 +87,7 @@ function blend_colors(color1, color2, percentage) {
 // ];
 //const colors = ['#e95c47', '#fdbf6f', '#ffffbe', '#bfe5a0', '#54aead'];
 
+// color stuff
 const magma = ["#a3307e", "#c83e73", "#e95462", "#fa7d5e", "#fed395"];
 const spring = ["#ffd12e", "#ffba45", "#ffa25d", "#ff8b74", "#ff748b"];
 const lspring = ["#ffd52a", "#ffaa55", "#ff807f", "#ff55aa", "#ff2ad5"];
@@ -98,6 +102,7 @@ const cool = [
   "#2ad5ff",
 ];
 const gnuplot2 = ["#fff00f", "#ffb847", "#ff7e81", "#f546b9", "#9a0cf3"];
+// stupid name for a color pallette
 const custom = [
   "#10a2f0",
   "#2adddd",
@@ -109,18 +114,14 @@ const custom = [
   "#ff807f",
   "#ff807f",
 ];
-const rev_custom = ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"];
-var colors = rev_custom;
-const beadSpeed = 0.3;
-const chance = 0.003;
-const nodeSize = 10;
-const edgeColor = 255;
-let tickAmount = 0.02;
-//const colors = ['#f77189', '#ae9d31', '#33b07a', '#38a9c5', '#cc7af4'];
-const maxBeads = 15;
-var fixedGraph = false;
-var highlightedUserId, fullWidth;
-let fullHeight = 700;
+const beadSpeed = 0.3; // little beads walking along edges of graph to make it look pretty
+const chance = 0.003; // chance of a bead spawning
+const nodeSize = 10; // the radius of each node
+let tickAmount = 0.02; // every timestep how much you move, higher means faster
+const maxBeads = 15; 
+var fixedGraph = false; // if true makes the graph fixed (save on computational costs)
+var highlightedUserId, fullWidth; // fullWidth is the width of the box the graph is contained in
+let fullHeight = 700; 
 const popularThreshold = 5;
 var interval;
 var totalBeads = 0;
@@ -444,7 +445,12 @@ const sketch = (p) => {
     //   // });
     // }
     layout.eachNode(function (node, point) {
-      drawNode(node, point.p);
+      drawNode(no Springy.Layout.ForceDirected(
+        graph,
+        stiffness, // Spring stiffness
+        repulsion, // Node repulsion
+        0.2 // Damping
+      );de, point.p);
     });
   };
 };
