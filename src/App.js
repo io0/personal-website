@@ -120,7 +120,23 @@ const groupMetadata = {
     name: "Z mod 3 cubed",
     symbol: "(\u2124\u2083)\u00B3",
     text: ""
-  }
+  },
+  Q8: {
+    name: "The Quaternions",
+    symbol: "Q\u2088",
+    text: "The Quaternions are everyone's favourite group. \
+    They were first described by Irish mathematician William \
+    Rowan Hamilton in 1843 and applied to mechanics in \
+    three-dimensional space.\
+    The vector part of a quaternion can be interpreted \
+    as a coordinate vector in ℝ3; therefore, the algebraic \
+    operations of the quaternions reflect the geometry of ℝ3. \
+    Just as complex numbers can be represented as matrices, so \
+    can quaternions. There are at least two ways of \
+    representing quaternions as matrices in such a way that \
+    quaternion addition and multiplication correspond to matrix \
+    addition and matrix multiplication."
+  },
 };
 function App() {
   const [currentGroup, setCurrentGroup] = useState("Z3");
