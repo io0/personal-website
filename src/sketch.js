@@ -87,9 +87,28 @@ function blend_colors(color1, color2, percentage) {
 const magma = ["#a3307e", "#c83e73", "#e95462", "#fa7d5e", "#fed395"];
 const spring = ["#ffd12e", "#ffba45", "#ffa25d", "#ff8b74", "#ff748b"];
 const lspring = ["#ffd52a", "#ffaa55", "#ff807f", "#ff55aa", "#ff2ad5"];
-const cool = ["#d52aff", "#aa55ff", "#807fff", "#55aaff", "#2ad5ff"];
+const cool = [
+  "#d52aff",
+  "#aa55ff",
+  "#807fff",
+  "#55aaff",
+  "#2ad5ff",
+  "#2ad5ff",
+  "#2ad5ff",
+  "#2ad5ff",
+];
 const gnuplot2 = ["#fff00f", "#ffb847", "#ff7e81", "#f546b9", "#9a0cf3"];
-const custom = ["#10a2f0", "#2adddd", "#ffd52a", "#ffaa55", "#ff807f"];
+const custom = [
+  "#10a2f0",
+  "#2adddd",
+  "#ffd52a",
+  "#ffaa55",
+  "#ff807f",
+  "#ff807f",
+  "#ff807f",
+  "#ff807f",
+  "#ff807f",
+];
 const rev_custom = ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"];
 var colors = rev_custom;
 const beadSpeed = 0.3;
@@ -112,7 +131,7 @@ let updateIds;
 let separation;
 let labels, schools, points, num_incoming;
 const stiffness = 400.0;
-const repulsion = 400.0;
+const repulsion = 1000.0;
 var graph = new Springy.Graph();
 var layout = new Springy.Layout.ForceDirected(
   graph,
@@ -210,7 +229,7 @@ const sketch = (p) => {
     var x2 = toScreen(p2).x;
     var y2 = toScreen(p2).y;
     //var edgeColor = colors[separation[edge.source.id]];
-    p.strokeWeight(1);
+    p.strokeWeight(1.5);
     const scaling = separation
       ? separation[edge.target.id] < 2
         ? 0.7
@@ -219,7 +238,9 @@ const sketch = (p) => {
     // const color = "rgba(255,255,255," + scaling + ")";
     // separation ? 'rgba(255,255,255,' +  (Math.max(1 - separation[edge.target.id]/4, 0.0)*0.7 + 0.3) + ')'
     //                         : 255;
-    const color = cool[edge.data.length - 2];
+    const orderEstimate = edge.data.replace("(", "").replace(")", "").length;
+    // console.log(edge.data, orderEstimate);
+    const color = cool[orderEstimate - 1];
     p.stroke(color);
     //p.strokeWeight(2);
     p.line(x1, y1, x2, y2);
@@ -291,7 +312,7 @@ const sketch = (p) => {
     } else if (order == 4) {
       p.square(-nodeSize / 2, -nodeSize / 2, nodeSize);
     } else {
-      polygon(p, nodeSize, order);
+      polygon(p, 0.75 * nodeSize, order);
     }
 
     if (updateIds && updateIds.includes(parseInt(node.id)) && node.id !== uid) {
@@ -343,7 +364,7 @@ const sketch = (p) => {
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
     // updateIds should be provided in props
     // updateIds = props.updateIds || [];
-    const cayleyGraph = getCayleyGraph("S4");
+    const cayleyGraph = getCayleyGraph(props.groupName);
     graph = new Springy.Graph();
     graph.loadJSON(cayleyGraph);
     meta = cayleyGraph.meta;
@@ -355,25 +376,25 @@ const sketch = (p) => {
       repulsion, // Node repulsion
       0.2 // Damping
     );
-    if (oldLayout) {
-      layout.tick(0.05);
-      for (const id in oldLayout.nodePoints) {
-        // slow it down when changing from previous graph
-        // tickAmount = Math.min(
-        //   0.008 + Object.keys(layout.nodePoints).length * 0.0005,
-        //   0.02
-        // );
-        tickAmount = 0.03;
-        if (id in layout.nodePoints) {
-          layout.nodePoints[id].p.x = oldLayout.nodePoints[id].p.x;
-          layout.nodePoints[id].p.y = oldLayout.nodePoints[id].p.y;
-          layout.nodePoints[id].a.x = oldLayout.nodePoints[id].a.x;
-          layout.nodePoints[id].a.y = oldLayout.nodePoints[id].a.y;
-          layout.nodePoints[id].v.x = oldLayout.nodePoints[id].v.x;
-          layout.nodePoints[id].v.y = oldLayout.nodePoints[id].v.y;
-        }
-      }
-    }
+    // if (oldLayout) {
+    //   layout.tick(0.05);
+    //   for (const id in oldLayout.nodePoints) {
+    //     // slow it down when changing from previous graph
+    //     // tickAmount = Math.min(
+    //     //   0.008 + Object.keys(layout.nodePoints).length * 0.0005,
+    //     //   0.02
+    //     // );
+    //     tickAmount = 0.05;
+    //     if (id in layout.nodePoints) {
+    //       layout.nodePoints[id].p.x = oldLayout.nodePoints[id].p.x;
+    //       layout.nodePoints[id].p.y = oldLayout.nodePoints[id].p.y;
+    //       layout.nodePoints[id].a.x = oldLayout.nodePoints[id].a.x;
+    //       layout.nodePoints[id].a.y = oldLayout.nodePoints[id].a.y;
+    //       layout.nodePoints[id].v.x = oldLayout.nodePoints[id].v.x;
+    //       layout.nodePoints[id].v.y = oldLayout.nodePoints[id].v.y;
+    //     }
+    //   }
+    // }
     layout.tick(0.05);
     // triggered when graph hasn't changed, but still need the position
     // highlightedUserId = props.highlightedUserId;
@@ -394,34 +415,34 @@ const sketch = (p) => {
     layout.eachEdge(function (edge, spring) {
       drawEdge(edge, spring.point1.p, spring.point2.p);
     });
-    if (!fixedGraph) {
-      if (layout.totalEnergy() > 0.02) {
-        layout.tick(tickAmount);
-      } else {
-        // fix the graph
-        fixedGraph = true;
-        // add strings
-
-        layout.eachEdge(function (edge, spring) {
-          var p1 = spring.point1.p;
-          var p2 = spring.point2.p;
-          var x1 = toScreen(p1).x;
-          var y1 = toScreen(p1).y;
-          var x2 = toScreen(p2).x;
-          var y2 = toScreen(p2).y;
-          //strings.push(new String(x1, y1, x2, y2, beadSpeed, colors[0], colors[0]));
-        });
-        if (graphJSON) {
-          // proxy for if graph has been loaded
-          p.noLoop();
-        }
-        //beads = new Beads(edge.x1, edge)
-      }
+    // if (!fixedGraph) {
+    if (layout.totalEnergy() > 0.01) {
+      layout.tick(tickAmount);
     } else {
-      // strings.forEach(string => {
-      //     string.draw();
-      // });
+      // fix the graph
+      fixedGraph = true;
+      // add strings
+
+      layout.eachEdge(function (edge, spring) {
+        var p1 = spring.point1.p;
+        var p2 = spring.point2.p;
+        var x1 = toScreen(p1).x;
+        var y1 = toScreen(p1).y;
+        var x2 = toScreen(p2).x;
+        var y2 = toScreen(p2).y;
+        //strings.push(new String(x1, y1, x2, y2, beadSpeed, colors[0], colors[0]));
+      });
+      if (graphJSON) {
+        // proxy for if graph has been loaded
+        p.noLoop();
+      }
+      //beads = new Beads(edge.x1, edge)
     }
+    // } else {
+    //   // strings.forEach(string => {
+    //   //     string.draw();
+    //   // });
+    // }
     layout.eachNode(function (node, point) {
       drawNode(node, point.p);
     });
