@@ -125,6 +125,7 @@ const groupGenerators = {
     ],
     [[1, 3, 5]],
   ],
+  Q8: [[[1,3,2,4],[5,7,6,8]],[[1,5,2,6],[3,8,4,7]]],
 };
 export const groupNames = Object.keys(groupGenerators);
 
