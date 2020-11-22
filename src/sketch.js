@@ -450,7 +450,7 @@ const sketch = (p) => {
         stiffness, // Spring stiffness
         repulsion, // Node repulsion
         0.2 // Damping
-      );de, point.p);
+      ));
     });
   };
 };
