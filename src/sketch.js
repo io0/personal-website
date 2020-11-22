@@ -118,10 +118,10 @@ const beadSpeed = 0.3; // little beads walking along edges of graph to make it l
 const chance = 0.003; // chance of a bead spawning
 const nodeSize = 10; // the radius of each node
 let tickAmount = 0.02; // every timestep how much you move, higher means faster
-const maxBeads = 15; 
+const maxBeads = 15;
 var fixedGraph = false; // if true makes the graph fixed (save on computational costs)
 var highlightedUserId, fullWidth; // fullWidth is the width of the box the graph is contained in
-let fullHeight = 700; 
+let fullHeight = 700;
 const popularThreshold = 5;
 var interval;
 var totalBeads = 0;
@@ -444,13 +444,9 @@ const sketch = (p) => {
     //   //     string.draw();
     //   // });
     // }
+
     layout.eachNode(function (node, point) {
-      drawNode(Springy.Layout.ForceDirected(
-        graph,
-        stiffness, // Spring stiffness
-        repulsion, // Node repulsion
-        0.2 // Damping
-      ));
+      drawNode(node, point.p);
     });
   };
 };
