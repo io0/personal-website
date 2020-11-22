@@ -118,10 +118,10 @@ const beadSpeed = 0.3; // little beads walking along edges of graph to make it l
 const chance = 0.003; // chance of a bead spawning
 const nodeSize = 10; // the radius of each node
 let tickAmount = 0.02; // every timestep how much you move, higher means faster
-const maxBeads = 15;
+const maxBeads = 15; 
 var fixedGraph = false; // if true makes the graph fixed (save on computational costs)
 var highlightedUserId, fullWidth; // fullWidth is the width of the box the graph is contained in
-let fullHeight = 700;
+let fullHeight = 700; 
 const popularThreshold = 5;
 var interval;
 var totalBeads = 0;
@@ -239,9 +239,7 @@ const sketch = (p) => {
     // const color = "rgba(255,255,255," + scaling + ")";
     // separation ? 'rgba(255,255,255,' +  (Math.max(1 - separation[edge.target.id]/4, 0.0)*0.7 + 0.3) + ')'
     //                         : 255;
-    const orderEstimate = edge.data.replace("(", "").replace(")", "").length;
-    // console.log(edge.data, orderEstimate);
-    const color = cool[orderEstimate - 1];
+    const color = cool[meta[edge.data].order - 1];
     p.stroke(color);
     //p.strokeWeight(2);
     p.line(x1, y1, x2, y2);
@@ -444,7 +442,6 @@ const sketch = (p) => {
     //   //     string.draw();
     //   // });
     // }
-
     layout.eachNode(function (node, point) {
       drawNode(node, point.p);
     });
