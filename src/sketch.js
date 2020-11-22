@@ -445,7 +445,7 @@ const sketch = (p) => {
     //   // });
     // }
     layout.eachNode(function (node, point) {
-      drawNode(no Springy.Layout.ForceDirected(
+      drawNode(Springy.Layout.ForceDirected(
         graph,
         stiffness, // Spring stiffness
         repulsion, // Node repulsion
