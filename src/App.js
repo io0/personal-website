@@ -4,33 +4,60 @@ import sketch from "./sketch";
 import "./App.css";
 import { useState } from "react";
 import { groupNames } from "./cayleyGraph";
+import styled from "@emotion/styled";
 
+const Button = styled.button`
+  border: none;
+  border-bottom: ${(props) => (props.isSelected ? "3px solid black" : "none")};
+  margin: 5px;
+  padding: 3px;
+  cursor: pointer;
+  outline: none;
+  font-family: Lora;
+  font-size: 18px;
+  background-color: transparent;
+`;
+const Wrapper = styled.div`
+  display: flex;
+`;
+const Sidebar = styled.div`
+  // background-color: grey;
+  margin-left: auto;
+  margin-right: 0;
+  padding: 20px;
+  min-width: 20%;
+  border-left: 1px solid grey;
+`;
+const Title = styled.div`
+  font-family: monospace;
+  font-size: 20px;
+`;
+
+const groupMetadata = {
+  Z3: {
+    name: "Z mod 3",
+  },
+};
 function App() {
   const [currentGroup, setCurrentGroup] = useState("Z3");
   return (
     <div className="App">
-      <P5Wrapper sketch={sketch} groupName={currentGroup} />
-      {groupNames.map((group) => (
-        <button
-          style={{
-            border: "none",
-            margin: 5,
-            padding: 3,
-            cursor: "pointer",
-            outline: "none",
-            fontFamily: "Lora",
-            fontSize: "18px",
-            borderBottom: group == currentGroup ? "3px solid black" : "none",
-            // fontWeight: 600,
-            backgroundColor: "transparent",
-            // group == currentGroup ? "rgba(241,200,85,0.6)" : "transparent",
-          }}
-          // isSelected={group == currentGroup}
-          onClick={() => setCurrentGroup(group)}
-        >
-          {group}
-        </button>
-      ))}
+      <Wrapper>
+        <div>
+          <P5Wrapper sketch={sketch} groupName={currentGroup} />
+          {groupNames.map((group) => (
+            <Button
+              isSelected={group == currentGroup}
+              onClick={() => setCurrentGroup(group)}
+            >
+              {group}
+            </Button>
+          ))}
+        </div>
+        <Sidebar>
+          <Title>{groupMetadata[currentGroup].name}</Title>
+        </Sidebar>
+      </Wrapper>
     </div>
   );
 }
