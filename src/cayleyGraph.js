@@ -1,13 +1,18 @@
-let test = {
+// 
+let example_json_graph = {
   nodes: ["1", "(12)", "(13)", "(23)", "(123)", "(132)"],
   meta: {
-    1: {
+    "1": {
       order: 1,
+      
     },
+    "(12)" : {
+      order: 2,
+    }
     //"labels": Object.fromEntries(nodes.map(nodeId => ([nodeId, nodeId == 7 ? "You" : "???"])))
   },
   // edges format: [node 1, node 2, generator] -when you left multiply node1 by the generator you get node 2
-  edges: [["(12)(134)", "(12)", "(13)"]],
+  edges: [["(12)(134)", "(12)", "(13)"], ["(12)", "(13)", "(123)"]],
 };
 // takes a permutation in the format [[1,2,3],[4,5],[6,8,7]]
 // and converts it to the string "(123)(45)(687)"
@@ -124,7 +129,7 @@ const groupGenerators = {
 export const groupNames = Object.keys(groupGenerators);
 
 function DFS(currentNode, nGraph, generators) {
-  // add the current node and the edges to nGraph
+  // add the current node and the edges to nGraph (depth first search)
   let currentNodeName = permToString(currentNode);
   const order = getOrder(currentNode);
   nGraph.meta[currentNodeName] = { order };
