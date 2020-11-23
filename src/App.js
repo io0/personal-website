@@ -108,7 +108,7 @@ const groupMetadata = {
   },
   A4: {
     name: "Alternating group on four elements",
-    symbol: "A\u2085",
+    symbol: "A\u2084",
     text: ""
   },
   A5: {

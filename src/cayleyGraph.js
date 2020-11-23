@@ -4,10 +4,11 @@ let example_json_graph = {
   meta: {
     "1": {
       order: 1,
-      
+      label: "𝟙"
     },
     "(12)" : {
       order: 2,
+      label: "(12)"
     }
     //"labels": Object.fromEntries(nodes.map(nodeId => ([nodeId, nodeId == 7 ? "You" : "???"])))
   },
@@ -58,6 +59,39 @@ function getOrder(element) {
   }
   return order;
 }
+
+function getLabel(element,groupName) {
+  let currentElement = element;
+  if (permToString(currentElement) == IDEN){
+    return "𝟙";
+  }
+  else if (groupName == "Q8" ) {
+    const i = groupGenerators["Q8"][0];
+    const j = groupGenerators["Q8"][1];
+    if (permToString(currentElement)==permToString(i)){
+      return "i";
+    } else if (permToString(currentElement)==permToString(j)){
+      return "j";
+    } else if (getOrder(currentElement)==2){
+      return "-1"
+    } else if (permToString(currentElement)==permToString(mult([...i, ...j]))) {
+      return "k";
+    } else if (permToString(currentElement)==permToString(mult([...j, ...i]))) {
+      return "-k";
+    } else if (permToString(currentElement)==permToString(mult([...i, ...i, ...i]))) {
+      return "-i";
+    } else if (permToString(currentElement)==permToString(mult([...j, ...j, ...j]))) {
+      return "-j";
+    } else {
+      console.log("Error!!! in getLabel");
+      return permToString(currentElement);
+    }
+  }
+  else {
+    return permToString(currentElement);
+  }
+}
+
 /**
  *
  * @param {*} perms
@@ -111,29 +145,20 @@ const groupGenerators = {
   S3: [[[1, 2]], [[1, 2, 3]]],
   S4: [[[1, 2]], [[1, 2, 3, 4]]],
   S5: [[[1, 2]], [[1, 2, 3, 4, 5]]],
-  A4: [
-    [
-      [1, 2],
-      [3, 4],
-    ],
-    [[1, 2, 3]],
-  ],
-  A5: [
-    [
-      [1, 2],
-      [3, 4],
-    ],
-    [[1, 3, 5]],
-  ],
+  A4: [[[1, 2],[3, 4]],[[1, 2, 3]]],
+  A5: [[[1, 2],[3, 4]],[[1, 3, 5]]],
   Q8: [[[1,3,2,4],[5,7,6,8]],[[1,5,2,6],[3,8,4,7]]],
 };
 export const groupNames = Object.keys(groupGenerators);
 
-function DFS(currentNode, nGraph, generators) {
+function DFS(currentNode, nGraph, generators, groupName) {
   // add the current node and the edges to nGraph (depth first search)
   let currentNodeName = permToString(currentNode);
   const order = getOrder(currentNode);
-  nGraph.meta[currentNodeName] = { order };
+  const label = getLabel(currentNode, groupName);
+  nGraph.meta[currentNodeName] = {order,
+  label};  // add the meta information - note: label is short for label:label
+
   nGraph.nodes.push(currentNodeName); // mark node as visited
   for (const gen of generators) {
     const child = mult([...gen, ...currentNode]);
@@ -144,7 +169,7 @@ function DFS(currentNode, nGraph, generators) {
     nGraph.edges.push([currentNodeName, childName, genName]);
     if (!nGraph.nodes.includes(childName)) {
       // call DFS  on child recursively
-      DFS(child, nGraph, generators);
+      DFS(child, nGraph, generators, groupName);
     }
   }
 }
@@ -157,7 +182,7 @@ export const getCayleyGraph = (groupName) => {
     meta: {},
     edges: [],
   };
-  DFS(currentNode, newGraph, generators);
+  DFS(currentNode, newGraph, generators, groupName);
   console.log("\nnewGraph", newGraph);
   return newGraph;
 };

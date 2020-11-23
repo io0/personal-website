@@ -333,7 +333,7 @@ const sketch = (p) => {
     if (node.id == uid) {
       p.text(node.id, -10, -30);
     } else {
-      let text = node.id;
+      let text = meta[node.id].label;
       // function for only showing first name
       // I decided not to use it in the end, it's hard to tell who is who
       // if (Object.entries(labels).length > 15){
@@ -342,6 +342,7 @@ const sketch = (p) => {
       //         text = text.split(" ")[0]
       //     }
       // }
+      // console.log("node in sketch.js",node.data);
       p.text(text, -10, -20);
       p.fill(color);
     }
