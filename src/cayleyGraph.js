@@ -1,19 +1,22 @@
-// 
+// example graph
 let example_json_graph = {
   nodes: ["1", "(12)", "(13)", "(23)", "(123)", "(132)"],
   meta: {
-    "1": {
+    1: {
       order: 1,
-      label: "𝟙"
+      label: "𝟙",
     },
-    "(12)" : {
+    "(12)": {
       order: 2,
-      label: "(12)"
-    }
+      label: "(12)",
+    },
     //"labels": Object.fromEntries(nodes.map(nodeId => ([nodeId, nodeId == 7 ? "You" : "???"])))
   },
   // edges format: [node 1, node 2, generator] -when you left multiply node1 by the generator you get node 2
-  edges: [["(12)(134)", "(12)", "(13)"], ["(12)", "(13)", "(123)"]],
+  edges: [
+    ["(12)(134)", "(12)", "(13)"],
+    ["(12)", "(13)", "(123)"],
+  ],
 };
 // takes a permutation in the format [[1,2,3],[4,5],[6,8,7]]
 // and converts it to the string "(123)(45)(687)"
@@ -60,34 +63,40 @@ function getOrder(element) {
   return order;
 }
 
-function getLabel(element,groupName) {
+function getLabel(element, groupName) {
   let currentElement = element;
-  if (permToString(currentElement) == IDEN){
+  if (permToString(currentElement) == IDEN) {
     return "𝟙";
-  }
-  else if (groupName == "Q8" ) {
+  } else if (groupName == "Q8") {
     const i = groupGenerators["Q8"][0];
     const j = groupGenerators["Q8"][1];
-    if (permToString(currentElement)==permToString(i)){
+    if (permToString(currentElement) == permToString(i)) {
       return "i";
-    } else if (permToString(currentElement)==permToString(j)){
+    } else if (permToString(currentElement) == permToString(j)) {
       return "j";
-    } else if (getOrder(currentElement)==2){
-      return "-1"
-    } else if (permToString(currentElement)==permToString(mult([...i, ...j]))) {
+    } else if (getOrder(currentElement) == 2) {
+      return "-1";
+    } else if (
+      permToString(currentElement) == permToString(mult([...i, ...j]))
+    ) {
       return "k";
-    } else if (permToString(currentElement)==permToString(mult([...j, ...i]))) {
+    } else if (
+      permToString(currentElement) == permToString(mult([...j, ...i]))
+    ) {
       return "-k";
-    } else if (permToString(currentElement)==permToString(mult([...i, ...i, ...i]))) {
+    } else if (
+      permToString(currentElement) == permToString(mult([...i, ...i, ...i]))
+    ) {
       return "-i";
-    } else if (permToString(currentElement)==permToString(mult([...j, ...j, ...j]))) {
+    } else if (
+      permToString(currentElement) == permToString(mult([...j, ...j, ...j]))
+    ) {
       return "-j";
     } else {
       console.log("Error!!! in getLabel");
       return permToString(currentElement);
     }
-  }
-  else {
+  } else {
     return permToString(currentElement);
   }
 }
@@ -131,6 +140,7 @@ function mult(perms) {
 // function conjugate_element()
 
 const groupGenerators = {
+  1: [[[]]],
   Z2: [[[1, 2]]],
   Z2xZ2: [[[1, 2]], [[3, 4]]],
   Z2xZ2xZ2: [[[1, 2]], [[3, 4]], [[5, 6]]],
@@ -145,9 +155,30 @@ const groupGenerators = {
   S3: [[[1, 2]], [[1, 2, 3]]],
   S4: [[[1, 2]], [[1, 2, 3, 4]]],
   S5: [[[1, 2]], [[1, 2, 3, 4, 5]]],
-  A4: [[[1, 2],[3, 4]],[[1, 2, 3]]],
-  A5: [[[1, 2],[3, 4]],[[1, 3, 5]]],
-  Q8: [[[1,3,2,4],[5,7,6,8]],[[1,5,2,6],[3,8,4,7]]],
+  A4: [
+    [
+      [1, 2],
+      [3, 4],
+    ],
+    [[1, 2, 3]],
+  ],
+  A5: [
+    [
+      [1, 2],
+      [3, 4],
+    ],
+    [[1, 3, 5]],
+  ],
+  Q8: [
+    [
+      [1, 3, 2, 4],
+      [5, 7, 6, 8],
+    ],
+    [
+      [1, 5, 2, 6],
+      [3, 8, 4, 7],
+    ],
+  ],
 };
 export const groupNames = Object.keys(groupGenerators);
 
@@ -156,8 +187,7 @@ function DFS(currentNode, nGraph, generators, groupName) {
   let currentNodeName = permToString(currentNode);
   const order = getOrder(currentNode);
   const label = getLabel(currentNode, groupName);
-  nGraph.meta[currentNodeName] = {order,
-  label};  // add the meta information - note: label is short for label:label
+  nGraph.meta[currentNodeName] = { order, label }; // add the meta information - note: label is short for label:label
 
   nGraph.nodes.push(currentNodeName); // mark node as visited
   for (const gen of generators) {
