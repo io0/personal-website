@@ -116,12 +116,12 @@ const custom = [
 ];
 const beadSpeed = 0.3; // little beads walking along edges of graph to make it look pretty
 const chance = 0.003; // chance of a bead spawning
-const nodeSize = 10; // the radius of each node
+const nodeSize = 7; // the radius of each node
 let tickAmount = 0.02; // every timestep how much you move, higher means faster
-const maxBeads = 15; 
+const maxBeads = 15;
 var fixedGraph = false; // if true makes the graph fixed (save on computational costs)
 var highlightedUserId, fullWidth; // fullWidth is the width of the box the graph is contained in
-let fullHeight = 700; 
+let fullHeight = 700;
 const popularThreshold = 5;
 var interval;
 var totalBeads = 0;
@@ -221,7 +221,7 @@ const sketch = (p) => {
       }
     }
   }
-  var offset = 5;
+  var offset = 3; // arrow size
   function drawEdge(edge, p1, p2) {
     // draw an edge
     // console.log("E", edge);
@@ -230,7 +230,7 @@ const sketch = (p) => {
     var x2 = toScreen(p2).x;
     var y2 = toScreen(p2).y;
     //var edgeColor = colors[separation[edge.source.id]];
-    p.strokeWeight(1.5);
+    p.strokeWeight(1);
     const scaling = separation
       ? separation[edge.target.id] < 2
         ? 0.7
@@ -364,6 +364,10 @@ const sketch = (p) => {
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
     // updateIds should be provided in props
     // updateIds = props.updateIds || [];
+    fullWidth = props.width;
+    fullHeight = props.width;
+    width = fullWidth - padding;
+    height = fullHeight - padding;
     const cayleyGraph = getCayleyGraph(props.groupName);
     graph = new Springy.Graph();
     graph.loadJSON(cayleyGraph);
@@ -404,6 +408,7 @@ const sketch = (p) => {
   p.setup = () => {
     let canvas = p.createCanvas(fullWidth || 650, fullHeight);
     p.textFont("Helvetica");
+    p.textSize(8);
     layout.tick(0.03);
   };
 

@@ -29,7 +29,7 @@ export const groupMetadata = {
   },
   Z2xZ2: {
     name: "Klein Four",
-    symbol: "K_4",
+    symbol: `${getSymbol("Z", 2)}\\times${getSymbol("Z", 2)}`,
     text: "",
   },
   Z2xZ2xZ2: {
@@ -39,7 +39,7 @@ export const groupMetadata = {
   },
   Z2xZ2xZ4: {
     name: "Klein Four times \u2124 mod 4",
-    symbol: `K_4 \\times ${getSymbol("Z", 4)}`,
+    symbol: `${getSymbol("K", 4)} \\times ${getSymbol("Z", 4)}`,
     text: "",
   },
   Z2xZ3: {
