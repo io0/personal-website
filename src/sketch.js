@@ -415,6 +415,7 @@ const sketch = (p) => {
   p.draw = () => {
     //p.camera(100,0, 380, 0, 0, 0, 0, 1, 0);
     // p.background(CONST.primaryCol);
+    // p.background("rgb(248,250,250)");
     p.background("white");
     p.smooth();
     layout.eachEdge(function (edge, spring) {

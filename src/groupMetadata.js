@@ -49,7 +49,7 @@ export const groupMetadata = {
   },
   Z2xZ2xZ2xZ2: {
     name: "\u2124\u2082\u2074",
-    symbol: `(${getSymbol("Z", 3)})^4`,
+    symbol: `(${getSymbol("Z", 2)})^4`,
     text: "",
   },
   Z3xZ3: {
@@ -63,12 +63,12 @@ export const groupMetadata = {
     text: "",
   },
   S3: {
-    name: "Symmetry group on three elements",
+    name: "S3: Symmetries of a triangle",
     symbol: "S_3",
     text: "",
   },
   S4: {
-    name: "Symmetry group on four elements",
+    name: "S4: Symmetries of a tetrahedron",
     symbol: "S_4",
     text: "",
   },

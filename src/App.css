@@ -4,8 +4,11 @@
 }
 .App {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.6;
+}
+b {
+  font-weight: 600;
 }
 p {
   margin: 10px 0; /* between paragraphs */
