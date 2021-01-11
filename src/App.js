@@ -17,6 +17,13 @@ const friends = {
   "Stephen Fay": "https://dcxst.github.io/",
   "Sweta Karlekar": "https://sweta.dev",
 };
+const urls = {
+  norway: "https://www.youtube.com/watch?v=AYIhAy6oK-4",
+  plant: "https://curius.s3-us-west-2.amazonaws.com/category_a.pdf",
+  marauders: "https://marauders.app/marley-xiong",
+  milo: "https://www.youtube.com/watch?v=_46AoSnHCRo",
+  speller: "https://www.youtube.com/watch?v=Ytnn0dv_0To",
+};
 const Button = styled.button`
   border: none;
   ${(props) =>
@@ -69,7 +76,7 @@ export const Link = styled((props) => {
     text-decoration: inherit;
     color: inherit;
     &:hover {
-      text-decoration: underline;
+      ${(props) => props.underline && "text-decoration: underline;"}
       color: black;
     }
   }
@@ -84,7 +91,7 @@ const LeftAlignPara = styled.div`
   font-size: 15px;
   text-align: left;
 `;
-const Green = styled.span`
+const GreenArea = styled.span`
   // color: #12b65c;
   // border-bottom: 1px solid #12b65c;
   // background-color: rgb(18 182 92 / 15%);
@@ -98,6 +105,24 @@ const Green = styled.span`
   padding: 0 2px;
   color: black;
 `;
+const Green = (props) => (
+  <GreenArea>
+    <Link href={props.name ? urls[props.name] : props.href} target="_blank">
+      {props.children}
+    </Link>
+  </GreenArea>
+);
+
+const Project = ({ name, description, display }) => {
+  return (
+    <div className="project">
+      <img src={process.env.PUBLIC_URL + `/${name}.png`} />
+      <div className="description">
+        <Green name={name}>{display}</Green> {description}
+      </div>
+    </div>
+  );
+};
 const Figure = styled.div`
   // background-color: rgb(247, 250, 250);
   // border-radius: 10px;
@@ -166,19 +191,19 @@ function App() {
             <Green>two papers</Green> in IEEE, becoming the only all-student
             group to do so. */}
             During college I brought together a group of 30 undergrads and built
-            a <Green>brain-controlled wheelchair</Green>. I led a team that
-            hacked and pulled all-nighters together, winning the International
-            NeuroTechX competition 3 years in a row. We independently published{" "}
-            <Green>two</Green> <Green>papers</Green> in IEEE brain-machine
-            interfaces.
+            a <Green name="milo"> brain-controlled wheelchair</Green>. I led a
+            team that hacked and pulled all-nighters together, winning the
+            International NeuroTechX competition 3 years in a row. We
+            independently published <Green>two</Green> <Green>papers</Green> in
+            IEEE brain-machine interfaces.
             {/* , becoming the only all-student group to do so. */}
           </p>
           <p>
             {" "}
             In a previous life, I was an International Biology Olympiad silver
             medalist ('15), spending summers{" "}
-            <Green>dissecting all the plants</Green> and animals in the grocery
-            store.
+            <Green name="plant">dissecting all the plants</Green> and animals in
+            the grocery store.
             {/* I dissected all the plants and animals in the
             grocery store, and spent an entire summer sectioning mice brains
             when I was 14. */}
@@ -218,7 +243,7 @@ function App() {
                       marginTop: "15px",
                     }}
                   >
-                    {groupMetadata[currentGroup].name}
+                    {/* {groupMetadata[currentGroup].name} */}
                   </p>
                 </p>
                 {/* <LeftAlignPara>
@@ -231,21 +256,49 @@ function App() {
           {/* <p style={{ margin: "10px 10%", fontSize: "12px" }}>
             Abstract algebra is the most recent cool thing I learned about
           </p> */}
-          <br></br>
-          <br></br>
-          <br></br>
-
-          <Title>What's next?</Title>
           <p>
             I’m currently exploring projects at the intersection of design,
-            community and education.
+            community and education. I'm a current <Green>Neo</Green> scholar
+            ('19) and will be joining On Deck (ODF8) as a fellow in February.
           </p>
           <br></br>
-
           <br></br>
-
           <br></br>
-
+          <h2>Cool stuff</h2>
+          Projects and experiments
+          <Project
+            name="marauders"
+            display="Marauders.app"
+            description="A map of interesting people, supplied by people's recommendations."
+          />
+          <Project name="milo" display="Brain-controlled wheelchair" />
+          <Project
+            name="china"
+            display="Deep learning in China"
+            description="I went to Beijing for 3 weeks
+              and interned at a startup estimating urban density for the government"
+          />
+          <Project
+            name="norway"
+            display="Hitchhiking Norway"
+            description="(video) from when I went around hitchhiking and camping in Norway for 11 days"
+          />
+          <Project
+            name="speller"
+            display="ChattERP"
+            description="A predictive speller that converts EEG
+              signals to text"
+          />
+          <Project
+            name="plant"
+            display="Plant microscopy"
+            description="Featuring the incredible order and structure of everyday plants.
+              Samples were made by hand using a tiny razor."
+          />
+          {/* <Title>What's next?</Title> */}
+          <br></br>
+          <br></br>
+          <br></br>
           <br></br>
         </Grid>
         <Grid item sm={5} xs={12}>
