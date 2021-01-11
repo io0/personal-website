@@ -23,6 +23,10 @@ const urls = {
   marauders: "https://marauders.app/marley-xiong",
   milo: "https://www.youtube.com/watch?v=_46AoSnHCRo",
   speller: "https://www.youtube.com/watch?v=Ytnn0dv_0To",
+  neo:
+    "https://www.forbes.com/sites/bizcarson/2019/01/18/an-early-facebook-investor-is-creating-a-scouting-network-for-brilliant-engineers/",
+  paper1: "https://ieeexplore.ieee.org/document/9283117",
+  paper2: "https://dl.acm.org/doi/abs/10.1109/SMC.2019.8914544",
 };
 const Button = styled.button`
   border: none;
@@ -194,8 +198,9 @@ function App() {
             a <Green name="milo"> brain-controlled wheelchair</Green>. I led a
             team that hacked and pulled all-nighters together, winning the
             International NeuroTechX competition 3 years in a row. We
-            independently published <Green>two</Green> <Green>papers</Green> in
-            IEEE brain-machine interfaces.
+            independently published <Green name="paper1">two</Green>{" "}
+            <Green name="paper2">papers</Green> in IEEE brain-machine
+            interfaces.
             {/* , becoming the only all-student group to do so. */}
           </p>
           <p>
@@ -258,8 +263,9 @@ function App() {
           </p> */}
           <p>
             I’m currently exploring projects at the intersection of design,
-            community and education. I'm a current <Green>Neo</Green> scholar
-            ('19) and will be joining On Deck (ODF8) as a fellow in February.
+            community and education. I'm a current <Green name="neo">Neo</Green>{" "}
+            scholar ('19) and will be joining On Deck (ODF8) as a fellow in
+            February.
           </p>
           <br></br>
           <br></br>
