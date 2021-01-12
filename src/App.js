@@ -27,6 +27,13 @@ const urls = {
     "https://www.forbes.com/sites/bizcarson/2019/01/18/an-early-facebook-investor-is-creating-a-scouting-network-for-brilliant-engineers/",
   paper1: "https://ieeexplore.ieee.org/document/9283117",
   paper2: "https://dl.acm.org/doi/abs/10.1109/SMC.2019.8914544",
+  school: "https://bio.school2point0.com",
+  "Anna Brandenberger": "https://abrandenberger.github.io/",
+  "Jasmine Wang": "https://twitter.com/j_asminewang",
+  "Noah Trenaman": "https://noahtren.com",
+  "Raffi Hotter": "https://twitter.com/raffi_hotter",
+  "Stephen Fay": "https://dcxst.github.io/",
+  "Sweta Karlekar": "https://sweta.dev",
 };
 const Button = styled.button`
   border: none;
@@ -74,13 +81,14 @@ const SidebarContainer = styled.div`
   opacity: 60%;
 `;
 export const Link = styled((props) => {
-  return <a {...props} children={props.children} />;
+  return <a {...props} target="_blank" children={props.children} />;
 })`
   && {
     text-decoration: inherit;
+    ${(props) => props.underline && "text-decoration: underline;"}
     color: inherit;
+    cursor: pointer;
     &:hover {
-      ${(props) => props.underline && "text-decoration: underline;"}
       color: black;
     }
   }
@@ -111,7 +119,7 @@ const GreenArea = styled.span`
 `;
 const Green = (props) => (
   <GreenArea>
-    <Link href={props.name ? urls[props.name] : props.href} target="_blank">
+    <Link href={props.name ? urls[props.name] : props.href}>
       {props.children}
     </Link>
   </GreenArea>
@@ -127,15 +135,23 @@ const Project = ({ name, description, display }) => {
     </div>
   );
 };
+
+const Graph = styled.div`
+  padding: 20px 0;
+  margin-top: 50px;
+  margin-bottom: 20px;
+`;
 const Figure = styled.div`
   // background-color: rgb(247, 250, 250);
   // border-radius: 10px;
   // margin-left: -20px;
   // width: 105%;
   // padding: 20px;
-  // padding-right: 20%;
+  // padding-right: 14%;
   padding: 20px 0;
-  margin-top: 50px;
+  padding-bottom: 40px;
+  // margin-top: 30px;
+  border-top: 1px solid lightgrey;
 `;
 const Magenta = styled.span`
   // color: black;
@@ -175,13 +191,12 @@ function App() {
             {/* Curiosity is my king. */}
           </p>
           <p>
-            Most recently I started{" "}
-            <Green onClick={() => setSchool(!showSchool)}>School 2.0</Green>, a
+            Most recently I started <Green name="school">School 2.0</Green>, a
             house in New Mexico for young people to learn and build together.
             {/* We had 26
             brilliant technologists under one roof — check it out.
           </p>
-          <p> */}
+          <p> */}{" "}
             I’ve worked on signal processing and ML at <Black>Google X</Black>,
             interned as a data scientist at Google, and written healthcare
             software for Perigen and IBM.
@@ -213,14 +228,16 @@ function App() {
             grocery store, and spent an entire summer sectioning mice brains
             when I was 14. */}
           </p>
-          <Figure>
+          <Graph>
             <Grid container>
               <Grid item sm={8} xs={12}>
-                <P5Wrapper
-                  sketch={sketch}
-                  groupName={currentGroup}
-                  width={250}
-                />
+                <div style={{ height: 270 }}>
+                  <P5Wrapper
+                    sketch={sketch}
+                    groupName={currentGroup}
+                    width={250}
+                  />
+                </div>
                 {groupNames.map((group) => (
                   <Button
                     isSelected={group == currentGroup}
@@ -257,51 +274,98 @@ function App() {
                 {/* <P5Wrapper sketch={sketchLattice} groupName={"Q8"} /> */}
               </Grid>
             </Grid>
-          </Figure>
+          </Graph>
           {/* <p style={{ margin: "10px 10%", fontSize: "12px" }}>
             Abstract algebra is the most recent cool thing I learned about
           </p> */}
           <p>
             I’m currently exploring projects at the intersection of design,
-            community and education. I'm a current <Green name="neo">Neo</Green>{" "}
-            scholar ('19) and will be joining On Deck (ODF8) as a fellow in
-            February.
+            community and education. I'm a current{" "}
+            <Green name="neo">Neo scholar</Green> ('19) and will be joining On
+            Deck (ODF8) as a fellow in February.
+          </p>
+          <p>
+            <b>Contact me </b>about ideas or collaborations! I can be found on{" "}
+            <Link href="https://twitter.com/_marleyx" underline>
+              Twitter
+            </Link>{" "}
+            or through{" "}
+            <Link href="mailto:marley.xiong@mail.mcgill.ca" underline>
+              email
+            </Link>
+            .
           </p>
           <br></br>
           <br></br>
           <br></br>
-          <h2>Cool stuff</h2>
-          Projects and experiments
-          <Project
-            name="marauders"
-            display="Marauders.app"
-            description="A map of interesting people, supplied by people's recommendations."
-          />
-          <Project name="milo" display="Brain-controlled wheelchair" />
-          <Project
-            name="china"
-            display="Deep learning in China"
-            description="I went to Beijing for 3 weeks
+          <Figure>
+            <h2>Cool stuff</h2>
+            Projects and experiments
+            <Project
+              name="marauders"
+              display="Marauders.app"
+              description="A map of interesting people, supplied by people's recommendations."
+            />
+            <Project name="milo" display="Brain-controlled wheelchair" />
+            <Project
+              name="china"
+              display="Deep learning in China"
+              description="I went to Beijing for 3 weeks
               and interned at a startup estimating urban density for the government"
-          />
-          <Project
-            name="norway"
-            display="Hitchhiking Norway"
-            description="(video) from when I went around hitchhiking and camping in Norway for 11 days"
-          />
-          <Project
-            name="speller"
-            display="ChattERP"
-            description="A predictive speller that converts EEG
+            />
+            <Project
+              name="norway"
+              display="Hitchhiking Norway"
+              description="(video) from when I went around hitchhiking and camping all across Norway"
+            />
+            <Project
+              name="speller"
+              display="ChattERP"
+              description="A predictive speller that converts EEG
               signals to text"
-          />
-          <Project
-            name="plant"
-            display="Plant microscopy"
-            description="Featuring the incredible order and structure of everyday plants.
+            />
+            <Project
+              name="plant"
+              display="Plant microscopy"
+              description="showcasing the incredible order and structure of everyday plants.
               Samples were made by hand using a tiny razor."
-          />
+            />
+          </Figure>
           {/* <Title>What's next?</Title> */}
+          <Figure>
+            <h2>Friends</h2>
+            Awesome people I've learned from immensely
+            <p>
+              <Link href={urls["Jasmine Wang"]} underline>
+                Jasmine Wang
+              </Link>
+              , who has enough energy to fit three lifetimes into one
+            </p>
+            <p>
+              <Link href={urls["Raffi Hotter"]} underline>
+                Raffi Hotter
+              </Link>
+              , whose curiosity is insatiable
+            </p>
+            <p>
+              <Link href={urls["Stephen Fay"]} underline>
+                Stephen Fay
+              </Link>
+              , who loves math and physics more than anything else
+            </p>
+            <p>
+              <Link href={urls["Sweta Karlekar"]} underline>
+                Sweta Karlekar
+              </Link>
+              , my role model in anything to do with people
+            </p>
+            <p>
+              <Link href={urls["Noah Trenaman"]} underline>
+                Noah Trenaman
+              </Link>
+              , who lives and breathes ideas
+            </p>
+          </Figure>
           <br></br>
           <br></br>
           <br></br>
