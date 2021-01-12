@@ -389,17 +389,17 @@ function App() {
             // src="https://ieeexplore.ieee.org/document/8914544"
             // src="https://dl.acm.org/doi/abs/10.1109/SMC.2019.8914544"
           ></iframe> */}
-          {/* <SidebarContainer> */}
-          {/* <iframe
-              src="https://curius.app/friendactivity/marley-xiong"
+          <SidebarContainer>
+            <iframe
+              src="https://curius.app/activity/marley-xiong"
               style={{
                 border: "none",
                 height: "210px",
                 backgroundColor: "rgb(250,250,250)",
               }}
               allowTransparency
-            ></iframe> */}
-          {/* <div style={{ width: "200px" }}>
+            ></iframe>
+            {/* <div style={{ width: "200px" }}>
               <div
                 style={{
                   fontSize: "14px",
@@ -415,8 +415,8 @@ function App() {
                   <Link href={friends[friend]}>{friend}</Link> ·{" "}
                 </>
               ))}
-            </div>
-          </SidebarContainer> */}
+            </div> */}
+          </SidebarContainer>
         </Grid>
       </Grid>
     </div>
