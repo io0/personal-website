@@ -184,10 +184,13 @@ function App() {
         <Grid item sm={5} xs={12} style={{ padding: "5%", paddingTop: "10vh" }}>
           <Title>Marley here!</Title>
           <p>
-            I’m one of those medieval minstrels who play songs in dorian.{" "}
+            I have an inexplicable urge to write nonsense here. Gabba. gwot.
+            griggolo.{" "}
             <Black>
-              I write code and hack on things to reinvent the way we learn.
-            </Black>
+              I write code and hack on things to reinvent the way we learn,
+            </Black>{" "}
+            because I'm a glutton myself and really need to learn everything
+            about everything.
             {/* Curiosity is my king. */}
           </p>
           <p>
