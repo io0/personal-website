@@ -9,14 +9,6 @@ import styled from "@emotion/styled";
 import MathJax from "react-mathjax";
 import Grid from "@material-ui/core/Grid";
 
-const friends = {
-  "Anna Brandenberger": "https://abrandenberger.github.io/",
-  "Jasmine Wang": "https://twitter.com/j_asminewang",
-  "Noah Trenaman": "https://noahtren.com",
-  "Raffi Hotter": "",
-  "Stephen Fay": "https://dcxst.github.io/",
-  "Sweta Karlekar": "https://sweta.dev",
-};
 const urls = {
   norway: "https://www.youtube.com/watch?v=AYIhAy6oK-4",
   plant: "https://curius.s3-us-west-2.amazonaws.com/category_a.pdf",
@@ -34,13 +26,14 @@ const urls = {
   "Raffi Hotter": "https://twitter.com/raffi_hotter",
   "Stephen Fay": "https://dcxst.github.io/",
   "Sweta Karlekar": "https://sweta.dev",
+  topos: "https://topos.house",
 };
 const Button = styled.button`
   border: none;
   ${(props) =>
     props.isSelected
       ? "border-bottom: 2px solid black;"
-      : "border-bottom:none;"};
+      : "border-bottom: 2px solid transparent;"};
   margin: 2px 5px 2px 0;
   padding: 1px 2px;
   cursor: pointer;
@@ -200,8 +193,8 @@ function App() {
           </p>
           <p> */}{" "}
             I’ve worked on signal processing and ML at <Black>Google X</Black>,
-            interned as a data scientist at Google, and written healthcare
-            software for Perigen and IBM.
+            interned at Google, and written healthcare software for Perigen and
+            IBM.
           </p>
           <p>
             {/* During my undergrad I led a student group that won the International
@@ -211,8 +204,9 @@ function App() {
             <Green>brain-controlled wheelchair</Green>. We published{" "}
             <Green>two papers</Green> in IEEE, becoming the only all-student
             group to do so. */}
-            During college I brought together a group of 30 undergrads and built
-            a <Green name="milo"> brain-controlled wheelchair</Green>. I led a
+            Starting in sophomore year, I brought together a group of 30
+            undergrads and built a{" "}
+            <Green name="milo"> brain-controlled wheelchair</Green>. I led a
             team that hacked and pulled all-nighters together, winning the
             International NeuroTechX competition 3 years in a row. We
             independently published <Green name="paper1">two</Green>{" "}
@@ -312,8 +306,7 @@ function App() {
             <Project
               name="china"
               display="Deep learning in China"
-              description="I went to Beijing for 3 weeks
-              and interned at a startup estimating urban density for the government"
+              description="Lived in Beijing for 3 weeks interning at a startup estimating urban density for the government"
             />
             <Project
               name="norway"
@@ -329,8 +322,7 @@ function App() {
             <Project
               name="plant"
               display="Plant microscopy"
-              description="showcasing the incredible order and structure of everyday plants.
-              Samples were made by hand using a tiny razor."
+              description="plants are very, very cool"
             />
           </Figure>
           {/* <Title>What's next?</Title> */}
@@ -366,6 +358,25 @@ function App() {
                 Noah Trenaman
               </Link>
               , who lives and breathes ideas
+            </p>
+          </Figure>
+          <Figure>
+            <h2>Communities</h2>
+            Groups I'm part of that have been particularly influential
+            <p>
+              <Link href={urls["topos"]} underline>
+                Topos
+              </Link>
+            </p>
+            <p>
+              <Link href="https://neo.com/" underline>
+                Neo
+              </Link>
+            </p>
+            <p>
+              <Link href="https://hacklodge.org/" underline>
+                Hack Lodge
+              </Link>
             </p>
           </Figure>
           <br></br>
