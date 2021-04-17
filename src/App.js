@@ -194,7 +194,7 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/differential">
+        <Route exact path="/differential-equations">
           <Video />
         </Route>
       </Switch>
