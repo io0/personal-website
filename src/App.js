@@ -8,7 +8,25 @@ import { groupMetadata } from "./groupMetadata";
 import styled from "@emotion/styled";
 import MathJax from "react-mathjax";
 import Grid from "@material-ui/core/Grid";
+import Video from "./Video";
+import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 
+import vttToJson from "vtt-to-json";
+
+const vttString = `WEBVTT
+Kind: captions
+Language: en
+
+00:00:04.029 --> 00:00:09.129
+After seeing how we think about ordinary differential
+equations in chapter 1, we turn now to an
+
+00:00:09.129 --> 00:00:13.349
+example of a partial differential equation,
+the heat equation.`;
+vttToJson(vttString).then((result) => {
+  console.log(result);
+});
 const urls = {
   norway: "https://www.youtube.com/watch?v=AYIhAy6oK-4",
   plant: "https://curius.s3-us-west-2.amazonaws.com/category_a.pdf",
@@ -28,6 +46,7 @@ const urls = {
   "Sweta Karlekar": "https://sweta.dev",
   topos: "https://topos.house",
 };
+
 const Button = styled.button`
   border: none;
   ${(props) =>
@@ -167,7 +186,22 @@ export function Formula(props) {
     </MathJax.Provider>
   );
 }
+
 function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/differential">
+          <Video />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+}
+function Home() {
   const [currentGroup, setCurrentGroup] = useState("Z2xZ2xZ4");
   const [showSchool, setSchool] = useState(false);
   return (
