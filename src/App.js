@@ -324,7 +324,7 @@ function Home() {
               Twitter
             </Link>{" "}
             or through{" "}
-            <Link href="mailto:marley.xiong@mail.mcgill.ca" underline>
+            <Link href="mailto:marleyxiong0@gmail.com" underline>
               email
             </Link>
             .
