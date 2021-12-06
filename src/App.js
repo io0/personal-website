@@ -31,11 +31,10 @@ vttToJson(vttString).then((result) => {
 const urls = {
   norway: "https://www.youtube.com/watch?v=AYIhAy6oK-4",
   plant: "https://curius.s3-us-west-2.amazonaws.com/category_a.pdf",
-  marauders: "https://marauders.app/marley-xiong",
+  marauders: "http://54.210.247.54/marley-xiong",
   milo: "https://www.youtube.com/watch?v=_46AoSnHCRo",
   speller: "https://www.youtube.com/watch?v=Ytnn0dv_0To",
-  neo:
-    "https://www.forbes.com/sites/bizcarson/2019/01/18/an-early-facebook-investor-is-creating-a-scouting-network-for-brilliant-engineers/",
+  neo: "https://www.forbes.com/sites/bizcarson/2019/01/18/an-early-facebook-investor-is-creating-a-scouting-network-for-brilliant-engineers/",
   paper1: "https://ieeexplore.ieee.org/document/9283117",
   paper2: "https://dl.acm.org/doi/abs/10.1109/SMC.2019.8914544",
   school: "https://bio.school2point0.com",
@@ -315,8 +314,7 @@ function Home() {
           <p>
             I’m currently exploring projects at the intersection of design,
             community and education. I'm a current{" "}
-            <Green name="neo">Neo scholar</Green> ('19) and will be joining On
-            Deck (ODF8) as a fellow in February.
+            <Green name="neo">Neo scholar</Green> ('19).
           </p>
           <p>
             <b>Contact me </b>about ideas or collaborations! I can be found on{" "}
