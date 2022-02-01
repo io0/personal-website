@@ -63,8 +63,9 @@ function Block() {
         </p>
         <p>
           Make no mistake, the term "cortical column" is more symbolic than
-          concrete. You will not find cylinders of neurons with sharp boundaries
-          where the receptive field changes.
+          concrete. You will not find discrete cylinders of neurons when you cut
+          up a brain, nor will you find functional boundaries where the
+          receptive field changes abruptly.
         </p>
       </BWrapper>
       <BWrapper>
@@ -72,7 +73,7 @@ function Block() {
         <p>
           Along the cortical surface, we often see <Head>topographic</Head>{" "}
           organization. Sensory and motor systems project to the brain in
-          ordered ways; you can recover a sensory surface from the cortical
+          ordered ways; you can recover a sensory surface from a cortical
           surface. By traveling across the brain in space, you can travel across
           the visual field, locations on the body, or frequencies of pitch.
         </p>
@@ -83,17 +84,18 @@ function Block() {
           <Head>Oscillations </Head> are fundamental to the working of the
           brain. Like the clock cycle of a computer, oscillation is used to
           synchronize operations. Information travels in ripples: someone says
-          your name — beat 1. The sound wave is digitized — beat 2. It spreads
-          to all of the first neuron’s neighbors — beat 3. It spreads to all of
-          those neuron’s neighbors — beat 4. Where is oscillation located? In
+          your name — beat 1. Spiking of auditory neurons — beat 2. Spiking of
+          those neurons' neighbors — beat 3. It spreads to all of those
+          neighbors' neighbors — beat 4. Where is oscillation located? In
           individual neurons, in networks of neurons, in coupled inputs and
           outputs? Do you need an environment to oscillate?
         </p>
         <p>
           Researchers in the 50s removed the spine of a cat and found, to their
           astonishment, that the disembodied spine still spiked with rhythmic
-          repetition. We're able to generate rhythmic output in the absence of
-          rhythmic input.
+          repetition. Since then oscillators have been found to be a general
+          property: all vertebrates and some invertebrates can generate rhythmic
+          output in the absence of rhythmic input.
         </p>
       </BWrapper>
       <BWrapper>
