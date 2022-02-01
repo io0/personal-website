@@ -22,7 +22,7 @@ p {
 :root {
   --corner-size: 15%;
 }
-img {
+.project img {
   -webkit-clip-path: polygon(
     5% 0,
     95% 0,
@@ -91,4 +91,15 @@ h2 {
   to {
     transform: rotate(360deg);
   }
+}
+
+.Neuro {
+  font-family: EB Garamond;
+  background-color: #fbf9f6;
+}
+.Neuro p {
+  /* color: #015e63; */
+  font-family: georgia;
+  line-height: 1.8em;
+  font-size: 0.9em;
 }

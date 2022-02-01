@@ -10,6 +10,7 @@ import MathJax from "react-mathjax";
 import Grid from "@material-ui/core/Grid";
 import Video from "./Video";
 import Steve from "./Steve";
+import Neuro from "./Neuro";
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 
 import vttToJson from "vtt-to-json";
@@ -199,6 +200,9 @@ function App() {
         </Route>
         <Route exact path="/steve">
           <Steve />
+        </Route>
+        <Route exact path="/neuro">
+          <Neuro />
         </Route>
       </Switch>
     </BrowserRouter>
