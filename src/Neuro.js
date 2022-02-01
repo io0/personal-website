@@ -68,6 +68,16 @@ function Block() {
         </p>
       </BWrapper>
       <BWrapper>
+        <img src="./image 7.png" width="180px" />
+        <p>
+          Along the cortical surface, we often see <Head>topographic</Head>{" "}
+          organization. Sensory and motor systems project to the brain in
+          ordered ways; you can recover a sensory surface from the cortical
+          surface. By traveling across the brain in space, you can travel across
+          the visual field, locations on the body, or frequencies of pitch.
+        </p>
+      </BWrapper>
+      <BWrapper>
         <img src="./image 5.png" width="250px" />
         <p>
           <Head>Oscillations </Head> are fundamental to the working of the
