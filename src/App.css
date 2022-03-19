@@ -50,7 +50,7 @@ p {
   );
 }
 h2 {
-  font-family: Computer Modern Serif;
+  font-family: Computer Modern Serif, serif;
   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
   font-weight: 400;
   margin: 0;

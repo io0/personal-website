@@ -91,7 +91,7 @@ const SidebarContainer = styled.div`
   position: fixed;
   right: 5%;
   margin-top: 5%;
-  opacity: 60%;
+  opacity: 80%;
 `;
 export const Link = styled((props) => {
   return <a {...props} target="_blank" children={props.children} />;
@@ -128,7 +128,7 @@ const GreenArea = styled.span`
   }
   border-radius: 5px;
   padding: 0 2px;
-  color: black;
+  // color: black;
 `;
 const Green = (props) => (
   <GreenArea>
@@ -178,13 +178,11 @@ const Black = styled.span`
 export function Formula(props) {
   console.log(props.tex);
   return (
-    <MathJax.Provider>
-      <MathJax.Node
-        inline
-        formula={props.tex}
-        style={{ outline: "none", border: "none", fontSize: "14px" }}
-      />
-    </MathJax.Provider>
+    <MathJax.Node
+      inline
+      formula={props.tex}
+      style={{ outline: "none", border: "none", fontSize: "14px" }}
+    />
   );
 }
 
@@ -213,219 +211,240 @@ function Home() {
   const [showSchool, setSchool] = useState(false);
   return (
     <div className="App">
-      <Grid container>
-        <Grid item sm={2} xs={12}></Grid>
-        <Grid item sm={5} xs={12} style={{ padding: "5%", paddingTop: "10vh" }}>
-          <Title>Marley here!</Title>
-          <p>
-            I have an inexplicable urge to write nonsense here. Gabba. gwot.
-            griggolo.{" "}
-            <Black>
-              I write code and hack on things to reinvent the way we learn,
-            </Black>{" "}
-            because I really need to learn everything about everything.
-            {/* Curiosity is my king. */}
-          </p>
-          <p>
-            Most recently I started <Green name="school">School 2.0</Green>, a
-            house in New Mexico for young people to learn and build together.
-            {/* We had 26
+      <MathJax.Provider>
+        <Grid container>
+          <Grid item sm={2} xs={12}></Grid>
+          <Grid
+            item
+            sm={5}
+            xs={12}
+            style={{ padding: "5%", paddingTop: "10vh" }}
+          >
+            <Title>Marley here!</Title>
+            <p>
+              I have an inexplicable urge to write nonsense here. Gabba. gwot.
+              griggolo.{" "}
+              <Black>
+                I write code and hack on things to reinvent the way we learn,
+              </Black>{" "}
+              because I really need to learn everything about everything.
+              {/* 
+              First, some words: Gabba. gwot. griggolo. I sometimes think about
+              teleporting the mind. To you who is here for information goods, I ship some nonsense from my mind to yours.
+              
+              so here is some nonsense — from my mind to
+              yours.
+              If you are here for
+              certain information goods, I must send you some nonsense as well!
+              You may be here for
+              information, but first I give you nonsense from my mind to yours.I have an inexplicable urge to write nonsense here. Gabba. gwot.
+              griggolo. 
+
+              and if you are here for certain information goods, To heal, to understand,
+              and to enhance the human mind. so there's something delightful
+              about shipping nonsense to you who are here for certain
+              information goods. */}
+              {/* Curiosity is my king. */}
+            </p>
+            <p>
+              Most recently I started <Green name="school">School 2.0</Green>, a
+              house in New Mexico for young people to learn and build together.
+              {/* We had 26
             brilliant technologists under one roof — check it out.
           </p>
           <p> */}{" "}
-            I’ve worked on signal processing and ML at <Black>Google X</Black>,
-            interned at Google, and written healthcare software for Perigen and
-            IBM.
-          </p>
-          <p>
-            {/* During my undergrad I led a student group that won the International
+              I’ve worked on neurotech at <Black>Google X</Black>, interned at
+              Google, and written healthcare software for Perigen and IBM.
+            </p>
+            <p>
+              {/* During my undergrad I led a student group that won the International
             NeuroTechX competition 3 years in a row. I brought together a group
             of 30 undergrads and, through a series of delirious hack days and
             nights, designed and built a{" "}
             <Green>brain-controlled wheelchair</Green>. We published{" "}
             <Green>two papers</Green> in IEEE, becoming the only all-student
             group to do so. */}
-            Starting in sophomore year, I brought together a group of 30
-            undergrads and built a{" "}
-            <Green name="milo"> brain-controlled wheelchair</Green>. I led a
-            team that hacked and pulled all-nighters together, winning the
-            International NeuroTechX competition 3 years in a row. We
-            independently published <Green name="paper1">two</Green>{" "}
-            <Green name="paper2">papers</Green> in IEEE brain-machine
-            interfaces.
-            {/* , becoming the only all-student group to do so. */}
-          </p>
-          <p>
-            {" "}
-            In a previous life, I was an International Biology Olympiad silver
-            medalist ('15), spending summers{" "}
-            <Green name="plant">dissecting all the plants</Green> and animals in
-            the grocery store.
-            {/* I dissected all the plants and animals in the
+              Starting in sophomore year, I brought together a group of 30
+              undergrads and built a{" "}
+              <Green name="milo"> brain-controlled wheelchair</Green>. I led a
+              team that hacked and pulled all-nighters together, winning the
+              International NeuroTechX competition 3 years in a row. We
+              independently published <Green name="paper1">two</Green>{" "}
+              <Green name="paper2">papers</Green> in IEEE brain-machine
+              interfaces.
+              {/* , becoming the only all-student group to do so. */}
+            </p>
+            <p>
+              {" "}
+              In a previous life, I was an International Biology Olympiad silver
+              medalist ('15), spending summers{" "}
+              <Green name="plant">dissecting all the plants</Green> and animals
+              in the grocery store.
+              {/* I dissected all the plants and animals in the
             grocery store, and spent an entire summer sectioning mice brains
             when I was 14. */}
-          </p>
-          <Graph>
-            <Grid container>
-              <Grid item sm={8} xs={12}>
-                <div style={{ height: 270 }}>
-                  <P5Wrapper
-                    sketch={sketch}
-                    groupName={currentGroup}
-                    width={250}
-                  />
-                </div>
-                {groupNames.map((group) => (
-                  <Button
-                    isSelected={group == currentGroup}
-                    onClick={() => setCurrentGroup(group)}
-                  >
-                    <Formula tex={groupMetadata[group].symbol} />
-                  </Button>
-                ))}
-                {/* <Lora>Z2 x Z2 x Z4 S3 A3</Lora> */}
-              </Grid>
-              <Grid
-                item
-                sm={4}
-                xs={12}
-                // style={{ paddingTop: 80 }}
-              >
-                <p style={{ fontSize: "10px" }}>
-                  Abstract algebra is the most recent cool thing I learned
-                  about. Click to explore some groups!
-                  <p
-                    style={{
-                      fontFamily: "Computer Modern Serif",
-                      fontSize: "15px",
-                      lineHeight: 1.2,
-                      marginTop: "15px",
-                    }}
-                  >
-                    {/* {groupMetadata[currentGroup].name} */}
+            </p>
+            <Graph>
+              <Grid container>
+                <Grid item sm={8} xs={12}>
+                  <div style={{ height: 270 }}>
+                    <P5Wrapper
+                      sketch={sketch}
+                      groupName={currentGroup}
+                      width={250}
+                    />
+                  </div>
+                  {groupNames.map((group) => (
+                    <Button
+                      isSelected={group == currentGroup}
+                      onClick={() => setCurrentGroup(group)}
+                    >
+                      <Formula tex={groupMetadata[group].symbol} />
+                    </Button>
+                  ))}
+                  {/* <Lora>Z2 x Z2 x Z4 S3 A3</Lora> */}
+                </Grid>
+                <Grid
+                  item
+                  sm={4}
+                  xs={12}
+                  // style={{ paddingTop: 80 }}
+                >
+                  <p style={{ fontSize: "10px" }}>
+                    Abstract algebra is the most recent cool thing I learned
+                    about. Click to explore some groups!
+                    <p
+                      style={{
+                        fontFamily: "Computer Modern Serif",
+                        fontSize: "15px",
+                        lineHeight: 1.2,
+                        marginTop: "15px",
+                      }}
+                    >
+                      {/* {groupMetadata[currentGroup].name} */}
+                    </p>
                   </p>
-                </p>
-                {/* <LeftAlignPara>
+                  {/* <LeftAlignPara>
                   {groupMetadata[currentGroup].text}
                 </LeftAlignPara> */}
-                {/* <P5Wrapper sketch={sketchLattice} groupName={"Q8"} /> */}
+                  {/* <P5Wrapper sketch={sketchLattice} groupName={"Q8"} /> */}
+                </Grid>
               </Grid>
-            </Grid>
-          </Graph>
-          {/* <p style={{ margin: "10px 10%", fontSize: "12px" }}>
+            </Graph>
+            {/* <p style={{ margin: "10px 10%", fontSize: "12px" }}>
             Abstract algebra is the most recent cool thing I learned about
           </p> */}
-          <p>
-            I’m currently exploring projects at the intersection of design,
-            community and education. I'm a current{" "}
-            <Green name="neo">Neo scholar</Green> ('19).
-          </p>
-          <p>
-            <b>Contact me </b>about ideas or collaborations! I can be found on{" "}
-            <Link href="https://twitter.com/_marleyx" underline>
-              Twitter
-            </Link>{" "}
-            or through{" "}
-            <Link href="mailto:marleyxiong0@gmail.com" underline>
-              email
-            </Link>
-            .
-          </p>
-          <br></br>
-          <br></br>
-          <br></br>
-          <Figure>
-            <h2>Cool stuff</h2>
-            Projects and experiments
-            <Project
-              name="marauders"
-              display="Marauders.app"
-              description="A map of interesting people, supplied by people's recommendations."
-            />
-            <Project name="milo" display="Brain-controlled wheelchair" />
-            <Project
-              name="china"
-              display="Deep learning in China"
-              description="Lived in Beijing for 3 weeks interning at a startup estimating urban density for the government"
-            />
-            <Project
-              name="norway"
-              display="Hitchhiking Norway"
-              description="(video) from when I went around hitchhiking and camping all across Norway"
-            />
-            <Project
-              name="speller"
-              display="ChattERP"
-              description="A predictive speller that converts EEG
+            <p>
+              I’m currently exploring projects at the intersection of design,
+              community and education. I'm a current{" "}
+              <Green name="neo">Neo scholar</Green> ('19).
+            </p>
+            <p>
+              <b>Contact me </b>about ideas or collaborations! I can be found on{" "}
+              <Link href="https://twitter.com/_marleyx" underline>
+                Twitter
+              </Link>{" "}
+              or through{" "}
+              <Link href="mailto:marleyxiong0@gmail.com" underline>
+                email
+              </Link>
+              .
+            </p>
+            <br></br>
+            <br></br>
+            <br></br>
+            <Figure>
+              <h2>Cool stuff</h2>
+              Projects and experiments
+              <Project
+                name="marauders"
+                display="Marauders.app"
+                description="A map of interesting people, supplied by people's recommendations."
+              />
+              <Project name="milo" display="Brain-controlled wheelchair" />
+              <Project
+                name="china"
+                display="Deep learning in China"
+                description="Lived in Beijing for 3 weeks interning at a startup estimating urban density for the government"
+              />
+              <Project
+                name="norway"
+                display="Hitchhiking Norway"
+                description="(video) from when I went around hitchhiking and camping all across Norway"
+              />
+              <Project
+                name="speller"
+                display="ChattERP"
+                description="A predictive speller that converts EEG
               signals to text"
-            />
-            <Project
-              name="plant"
-              display="Plant microscopy"
-              description="plants are very, very cool"
-            />
-          </Figure>
-          {/* <Title>What's next?</Title> */}
-          <Figure>
-            <h2>Friends</h2>
-            Awesome people I've learned from immensely
-            <p>
-              <Link href={urls["Jasmine Wang"]} underline>
-                Jasmine Wang
-              </Link>
-              , who has enough energy to fit three lifetimes into one
-            </p>
-            <p>
-              <Link href={urls["Raffi Hotter"]} underline>
-                Raffi Hotter
-              </Link>
-              , whose curiosity is insatiable
-            </p>
-            <p>
-              <Link href={urls["Stephen Fay"]} underline>
-                Stephen Fay
-              </Link>
-              , who loves math and physics more than anything else
-            </p>
-            <p>
-              <Link href={urls["Sweta Karlekar"]} underline>
-                Sweta Karlekar
-              </Link>
-              , my role model in anything to do with people
-            </p>
-            <p>
-              <Link href={urls["Noah Trenaman"]} underline>
-                Noah Trenaman
-              </Link>
-              , who lives and breathes ideas
-            </p>
-          </Figure>
-          <Figure>
-            <h2>Communities</h2>
-            Groups I'm part of that have been particularly influential
-            <p>
-              <Link href={urls["topos"]} underline>
-                Topos
-              </Link>
-            </p>
-            <p>
-              <Link href="https://neo.com/" underline>
-                Neo
-              </Link>
-            </p>
-            <p>
-              <Link href="https://hacklodge.org/" underline>
-                Hack Lodge
-              </Link>
-            </p>
-          </Figure>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-        </Grid>
-        <Grid item sm={5} xs={12}>
-          {/* <iframe
+              />
+              <Project
+                name="plant"
+                display="Plant microscopy"
+                description="plants are very, very cool"
+              />
+            </Figure>
+            {/* <Title>What's next?</Title> */}
+            <Figure>
+              <h2>Friends</h2>
+              Awesome people I've learned from immensely
+              <p>
+                <Link href={urls["Jasmine Wang"]} underline>
+                  Jasmine Wang
+                </Link>
+                , who has enough energy to fit three lifetimes into one
+              </p>
+              <p>
+                <Link href={urls["Raffi Hotter"]} underline>
+                  Raffi Hotter
+                </Link>
+                , whose curiosity is insatiable
+              </p>
+              <p>
+                <Link href={urls["Stephen Fay"]} underline>
+                  Stephen Fay
+                </Link>
+                , who loves math and physics more than anything else
+              </p>
+              <p>
+                <Link href={urls["Sweta Karlekar"]} underline>
+                  Sweta Karlekar
+                </Link>
+                , my role model in anything to do with people
+              </p>
+              <p>
+                <Link href={urls["Noah Trenaman"]} underline>
+                  Noah Trenaman
+                </Link>
+                , who lives and breathes ideas
+              </p>
+            </Figure>
+            <Figure>
+              <h2>Communities</h2>
+              Groups I'm part of that have been particularly influential
+              <p>
+                <Link href={urls["topos"]} underline>
+                  Topos
+                </Link>
+              </p>
+              <p>
+                <Link href="https://neo.com/" underline>
+                  Neo
+                </Link>
+              </p>
+              <p>
+                <Link href="https://hacklodge.org/" underline>
+                  Hack Lodge
+                </Link>
+              </p>
+            </Figure>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+          </Grid>
+          <Grid item sm={5} xs={12}>
+            {/* <iframe
             style={{
               border: "none",
               margin: "auto",
@@ -442,17 +461,17 @@ function Home() {
             // src="https://ieeexplore.ieee.org/document/8914544"
             // src="https://dl.acm.org/doi/abs/10.1109/SMC.2019.8914544"
           ></iframe> */}
-          <SidebarContainer>
-            <iframe
-              src="https://curius.app/activity/marley-xiong"
-              style={{
-                border: "none",
-                height: "210px",
-                backgroundColor: "rgb(250,250,250)",
-              }}
-              allowTransparency
-            ></iframe>
-            {/* <div style={{ width: "200px" }}>
+            <SidebarContainer>
+              <iframe
+                src="https://curius.app/activity/marley-xiong"
+                style={{
+                  border: "none",
+                  height: "210px",
+                  backgroundColor: "rgb(250,250,250)",
+                }}
+                allowTransparency
+              ></iframe>
+              {/* <div style={{ width: "200px" }}>
               <div
                 style={{
                   fontSize: "14px",
@@ -469,9 +488,10 @@ function Home() {
                 </>
               ))}
             </div> */}
-          </SidebarContainer>
+            </SidebarContainer>
+          </Grid>
         </Grid>
-      </Grid>
+      </MathJax.Provider>
     </div>
   );
 }
