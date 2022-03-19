@@ -222,22 +222,21 @@ function Home() {
           >
             <Title>Marley here!</Title>
             <p>
-              I have an inexplicable urge to write nonsense here. Gabba. gwot.
-              griggolo.{" "}
-              <Black>
-                I write code and hack on things to reinvent the way we learn,
-              </Black>{" "}
-              because I really need to learn everything about everything.
-              {/* 
               First, some words: Gabba. gwot. griggolo. I sometimes think about
-              teleporting the mind. To you who is here for information goods, I ship some nonsense from my mind to yours.
+              teleporting the mind. To you who are here, I give the gift of
+              nonsense first, from my mind to yours!
+              {/* 
+              
+              So to you I ship some nonsense from my mind to yours.
+              
+              To you who is here for information goods, I ship some nonsense from my mind to yours.
               
               so here is some nonsense — from my mind to
               yours.
               If you are here for
               certain information goods, I must send you some nonsense as well!
               You may be here for
-              information, but first I give you nonsense from my mind to yours.I have an inexplicable urge to write nonsense here. Gabba. gwot.
+              information, but first I give the gift of nonsense, from my mind to yours.I have an inexplicable urge to write nonsense here. Gabba. gwot.
               griggolo. 
 
               and if you are here for certain information goods, To heal, to understand,
