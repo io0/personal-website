@@ -180,7 +180,7 @@ const Underline = styled.div`
   display: inline-block;
   &:after {
     content: "";
-    width: 40px;
+    width: 100%;
     height: 2px;
     background-color: #fee400;
     display: block;
@@ -345,9 +345,12 @@ function Home() {
             Abstract algebra is the most recent cool thing I learned about
           </p> */}
             <p>
-              I’m currently building <Underline>Curius</Underline> and still
-              learning. So many surfaces are strange to me, but most of all the
-              mind and the technology to bring minds together.
+              I’m currently building{" "}
+              <Link href="https://curius.app/marley-xiong">
+                <Underline>Curius</Underline>
+              </Link>{" "}
+              and still learning. So many surfaces are strange to me, but most
+              of all the mind and the technology to bring minds together.
             </p>
             <p>
               <b>Contact me </b>about ideas or collaborations! I can be found on{" "}
