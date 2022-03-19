@@ -91,7 +91,7 @@ const SidebarContainer = styled.div`
   position: fixed;
   right: 5%;
   margin-top: 5%;
-  opacity: 80%;
+  opacity: 70%;
 `;
 export const Link = styled((props) => {
   return <a {...props} target="_blank" children={props.children} />;
@@ -175,6 +175,17 @@ const Black = styled.span`
   // color: black;
   font-weight: 600;
 `;
+
+const Underline = styled.div`
+  display: inline-block;
+  &:after {
+    content: "";
+    width: 40px;
+    height: 2px;
+    background-color: #fee400;
+    display: block;
+  }
+`;
 export function Formula(props) {
   console.log(props.tex);
   return (
@@ -223,7 +234,7 @@ function Home() {
             <Title>Marley here!</Title>
             <p>
               First, some words: Gabba. gwot. griggolo. I sometimes think about
-              teleporting the mind. To you who are here, I give the gift of
+              teleporting the mind. To you on this page, I give the gift of
               nonsense first, from my mind to yours!
               {/* 
               
@@ -309,7 +320,7 @@ function Home() {
                   xs={12}
                   // style={{ paddingTop: 80 }}
                 >
-                  <p style={{ fontSize: "10px" }}>
+                  <p style={{ fontSize: "12px" }}>
                     Abstract algebra is the most recent cool thing I learned
                     about. Click to explore some groups!
                     <p
@@ -334,9 +345,9 @@ function Home() {
             Abstract algebra is the most recent cool thing I learned about
           </p> */}
             <p>
-              I’m currently exploring projects at the intersection of design,
-              community and education. I'm a current{" "}
-              <Green name="neo">Neo scholar</Green> ('19).
+              I’m currently building <Underline>Curius</Underline> and still
+              learning. So many surfaces are strange to me, but most of all the
+              mind and the technology to bring minds together.
             </p>
             <p>
               <b>Contact me </b>about ideas or collaborations! I can be found on{" "}
