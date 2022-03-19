@@ -402,22 +402,22 @@ function Home() {
               <h2>Friends</h2>
               Awesome people I've learned from immensely
               <p>
-                <Link href={urls["Jasmine Wang"]} underline>
-                  Jasmine Wang
+                <Link href={urls["Anna Brandenberger"]} underline>
+                  Anna Brandenberger
                 </Link>
-                , who has enough energy to fit three lifetimes into one
-              </p>
-              <p>
-                <Link href={urls["Raffi Hotter"]} underline>
-                  Raffi Hotter
-                </Link>
-                , whose curiosity is insatiable
+                , in art and understanding
               </p>
               <p>
                 <Link href={urls["Stephen Fay"]} underline>
                   Stephen Fay
                 </Link>
                 , who loves math and physics more than anything else
+              </p>
+              <p>
+                <Link href={urls["Raffi Hotter"]} underline>
+                  Raffi Hotter
+                </Link>
+                , whose curiosity is insatiable
               </p>
               <p>
                 <Link href={urls["Sweta Karlekar"]} underline>
@@ -430,6 +430,12 @@ function Home() {
                   Noah Trenaman
                 </Link>
                 , who lives and breathes ideas
+              </p>
+              <p>
+                <Link href={urls["Jasmine Wang"]} underline>
+                  Jasmine Wang
+                </Link>
+                , who has enough energy to fit three lifetimes into one
               </p>
             </Figure>
             <Figure>
