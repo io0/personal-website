@@ -210,7 +210,7 @@ function App() {
         <Route exact path="/steve">
           <Steve />
         </Route>
-        <Route exact path="/neuro">
+        <Route exact path="/neuroart">
           <Neuro />
         </Route>
       </Switch>
